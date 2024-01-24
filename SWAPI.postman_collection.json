@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "46eac9b7-8ef4-4727-8bea-d070695b422f",
+		"name": "SWAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22431380"
+	},
+	"item": [
+		{
+			"name": "Starships",
+			"item": [
+				{
+					"name": "Get all Starships",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Your test name\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.lenght).to.equal(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ApiURL}}/starships/",
+							"host": [
+								"{{ApiURL}}"
+							],
+							"path": [
+								"starships",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all Starships page param",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ApiURL}}/starships/?page=2",
+									"host": [
+										"{{ApiURL}}"
+									],
+									"path": [
+										"starships",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "People",
+			"item": [
+				{
+					"name": "Get people by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ApiURL}}/people/1/",
+							"host": [
+								"{{ApiURL}}"
+							],
+							"path": [
+								"people",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all People",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response not be empty\", function () {\r",
+									"    var jsonData = pm.response;\r",
+									"    jsonData.to.be.withBody\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ApiURL}}/people/",
+							"host": [
+								"{{ApiURL}}"
+							],
+							"path": [
+								"people",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Planets",
+			"item": [
+				{
+					"name": "Get planet by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ApiURL}}/planets/27",
+							"host": [
+								"{{ApiURL}}"
+							],
+							"path": [
+								"planets",
+								"27"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Schema",
+			"item": [
+				{
+					"name": "Get schema Species",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ApiURL}}/species/schema/",
+							"host": [
+								"{{ApiURL}}"
+							],
+							"path": [
+								"species",
+								"schema",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Films",
+			"item": [
+				{
+					"name": "Get films by name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let responseData = pm.response.json()\r",
+									"pm.environment.set(\"nameGetFilm\", responseData.results[0].title);\r",
+									"\r",
+									"pm.test(\"Validate name film\", function () {\r",
+									"    var envName = pm.environment.get(\"nameGetFilm\");\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.results[0].title).to.eql(envName);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ApiURL}}/films/?search=A New Hope",
+							"host": [
+								"{{ApiURL}}"
+							],
+							"path": [
+								"films",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "A New Hope"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wookiee",
+			"item": [
+				{
+					"name": "People request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
